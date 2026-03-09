@@ -1,5 +1,5 @@
 const express = require("express");
-const { login, signup, fetchMe } = require("../controllers/auth.controllers");
+const { login, signup, fetchMe, logout, refresh } = require("../controllers/auth.controllers");
 
 
 const authRouter = express.Router();
@@ -13,8 +13,8 @@ const authRouter = express.Router();
 
 authRouter.post("/login", login)
 authRouter.post("/signup", signup);
-authRouter.post("/logout", (req,res) => res.sendStatus(200));
-authRouter.post("/refresh", (req,res) => res.sendStatus(200));
+authRouter.post("/logout", logout);
+authRouter.post("/refresh", refresh);
 authRouter.get("/me", fetchMe);
 
 
