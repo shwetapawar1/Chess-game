@@ -1,34 +1,29 @@
 const mongoose = require("mongoose");
-
-//name
+// name
 // email
 // passwordHash
-// role => admin / user
+// role -> admin/user
 // avatar
-// stats : {rating, wins , losses, draws, currentStreak, maxStreak}
-
-const userSchema = mongoose.Schema({
-    name: {type: String, required: true},
-    email: {type: String, required: true},
-    passwordHash: {type: String , required: true},
-    role: {type: String, defaul: "User" , enum:["ADMIN", "USER"]},
-    avatar: {type: String, default: ""},
+// stats : {rating, wins, losses, draws, currentStreak, maxStreak}
+const userSchema = mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    passwordHash: { type: String, required: true },
+    role: { type: String, default: "USER", enum: ["ADMIN", "USER"] },
+    avatar: { type: String, default: "" },
     stats: {
-        rating: {type: Number, dafault: 1200},
-        wins: {type: Number, default: 0},
-        losses: { type: Number, default: 0},
-        draws: {type: Number, default: 0},
-        gamesPlayed: {type: Number, default: 0},
-        currentStreak: {type: Number, default: 0},
-        bestStreak: {type: Number, default: 0}
+      rating: { type: Number, default: 1200 },
+      wins: { type: Number, default: 0 },
+      losses: { type: Number, default: 0 },
+      draws: { type: Number, default: 0 },
+      gamesPlayed: { type: Number, default: 0 },
+      currentStreak: { type: Number, default: 0 },
+      bestStreak: { type: Number, default: 0 },
     },
-
-
-},
-{timestamps: true},
-
+  },
+  { timestamps: true },
 );
 
 const User = mongoose.model("User", userSchema);
-module.exports = {User};
-
+module.exports = { User };
